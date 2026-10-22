@@ -1,20 +1,18 @@
 #pragma once
 #include <cmath>
-#include <numbers>
-#include <iostream>
-
-using namespace std;
 
 class mathFunctions {
 public:    
-    static double sigmoidFunction(double inputVal){
-        double returnVal = 1 / (1 + pow(numbers::e, inputVal * -1));
-        return returnVal;
+    static double sigmoidFunction(double inputVal) {
+        if (inputVal >= 0.0) {
+            const double expValue = std::exp(-inputVal);
+            return 1.0 / (1.0 + expValue);
+        }
+        const double expValue = std::exp(inputVal);
+        return expValue / (1.0 + expValue);
     }
 
-    static double tanhFunction(double inputVal){
-        double numerator = (pow(numbers::e, inputVal)) - pow(numbers::e, inputVal * -1);
-        double denominator = (pow(numbers::e, inputVal) + pow(numbers::e, inputVal * -1));
-        return numerator / denominator;
+    static double tanhFunction(double inputVal) {
+        return std::tanh(inputVal);
     }
 };
